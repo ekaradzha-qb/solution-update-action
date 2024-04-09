@@ -19,10 +19,8 @@ const QBL_FILENAME = core.getInput('qbl_filename')
 async function run() {
   try {
     const solutionYaml = await getSolutionYaml()
-    if(solutionYaml == null) {
-      core.setFailed(
-          'Solution YAML is empty'
-      )
+    if (solutionYaml == null) {
+      core.setFailed('Solution YAML is empty')
       return
     }
 

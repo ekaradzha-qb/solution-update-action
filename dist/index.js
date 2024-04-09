@@ -42065,9 +42065,15 @@ const QBL_FILENAME = core.getInput('qbl_filename')
  */
 async function run() {
   try {
+    const solutionYaml = await getSolutionYaml()
+    if (solutionYaml == null) {
+      core.setFailed('Solution YAML is empty')
+      return
+    }
+
     const updateResponse = await updateSolution(
       QB_SOLUTION_ID,
-      getSolutionYaml(),
+      solutionYaml,
       QBL_VERSION,
       QB_REALM,
       QB_USR_TOKEN
@@ -42097,7 +42103,7 @@ async function getSolutionYaml() {
     repo,
     path: QBL_FILENAME
   })
-  console.info(yaml)
+
   if (yaml.data.content != null) {
     return atob(yaml.data.content)
   }
