@@ -20,8 +20,8 @@ inputs:
   qbl_filename:
     description:
       'Filename for the QBL file the will be checked in the repository'
-    default: 'solution_qbl.yaml'
-  qb_solution_id_to_update:
+    default: 'solution.yaml'
+  qb_solution_id:
     description: 'ID of solution to be updated'
     required: true
 
