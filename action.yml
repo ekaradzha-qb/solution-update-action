@@ -1,0 +1,41 @@
+name: 'The name of your action here'
+description: 'Provide a description here'
+author: 'Your name or organization here'
+
+# Define your inputs here.
+inputs:
+  gh_token:
+    description: 'GitHub token'
+    required: true
+  owner_name:
+    description: 'Owner name of the repository'
+    required: true
+  owner_email:
+    description: 'Owner email of the repository'
+    required: true
+  # QBL settings
+  qb_user_token:
+    description: 'Quickbase user token'
+    required: true
+  qb_realm:
+    description: 'Quickbase realm name'
+    required: true
+  qbl_version:
+    description: 'Quickbase QBL version'
+    default: '0.2'
+  qbl_filename:
+    description:
+      'Filename for the QBL file the will be checked in the repository'
+    default: 'solution_qbl.yaml'
+  qb_solution_id:
+    description: 'ID of solution to export'
+    required: true
+
+# Define your outputs here.
+outputs:
+  head_branch:
+    description: 'Name of the branch'
+
+runs:
+  using: node20
+  main: dist/index.js
