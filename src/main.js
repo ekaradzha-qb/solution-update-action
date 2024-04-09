@@ -6,7 +6,7 @@ const { rest } = new Octokit({ auth: core.getInput('gh_token') })
 //Action variables
 const repo = context.repo.repo
 const owner = context.repo.owner
-const QB_SOLUTION_ID = core.getInput('qb_solution_update_id')
+const QB_SOLUTION_ID = core.getInput('qb_solution_id_to_update')
 const QB_USR_TOKEN = core.getInput('qb_user_token')
 const QB_REALM = core.getInput('qb_realm')
 const QBL_VERSION = core.getInput('qbl_version')
