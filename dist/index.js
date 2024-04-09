@@ -42053,7 +42053,7 @@ const { rest } = new Octokit({ auth: core.getInput('gh_token') })
 //Action variables
 const repo = context.repo.repo
 const owner = context.repo.owner
-const QB_SOLUTION_ID = core.getInput('qb_solution_id')
+const QB_SOLUTION_ID = core.getInput('qb_solution_update_id')
 const QB_USR_TOKEN = core.getInput('qb_user_token')
 const QB_REALM = core.getInput('qb_realm')
 const QBL_VERSION = core.getInput('qbl_version')
@@ -42080,17 +42080,13 @@ async function run() {
     )
 
     if (updateResponse.status !== 200) {
-      console.error(updateResponse.statusText)
-      console.error(updateResponse.text())
-      console.error(updateResponse.body)
       core.setFailed(
         `Failed to update solution. Status code: ${updateResponse.status}, ${updateResponse.statusText}`
       )
-
       return
     }
 
-    core.setOutput('branch_name', '')
+    core.setOutput('solution_api_message', updateResponse.json())
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)

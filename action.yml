@@ -21,8 +21,8 @@ inputs:
     description:
       'Filename for the QBL file the will be checked in the repository'
     default: 'solution_qbl.yaml'
-  qb_solution_id:
-    description: 'ID of solution to export'
+  qb_solution_update_id:
+    description: 'ID of solution to be updated'
     required: true
 
 # Define your outputs here.
