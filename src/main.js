@@ -18,7 +18,7 @@ const QBL_FILENAME = core.getInput('qbl_filename')
  */
 async function run() {
   try {
-    const status = await updateSolution(
+    const updateResponse = await updateSolution(
       QB_SOLUTION_ID,
       getSolutionYaml(),
       QBL_VERSION,
@@ -26,18 +26,14 @@ async function run() {
       QB_USR_TOKEN
     )
 
-<<<<<<< Updated upstream
-    if (status !== 200) {
-      core.setFailed(`Failed to update solution. Status code: ${status}`)
-=======
-    if (updateResponse.status !== 200) {
+      if (updateResponse.status !== 200) {
       console.error(updateResponse.statusText)
       console.error(updateResponse.text())
       console.error(updateResponse.body)
       core.setFailed(
         `Failed to update solution. Status code: ${updateResponse.status}, ${updateResponse.statusText}`
       )
->>>>>>> Stashed changes
+
       return
     }
 
@@ -54,7 +50,7 @@ async function getSolutionYaml() {
     repo,
     path: QBL_FILENAME
   })
-
+  console.info(yaml)
   if (yaml.data.content != null) {
     return atob(yaml.data.content)
   }
@@ -82,24 +78,20 @@ async function updateSolution(
     return false
   }
 
-<<<<<<< Updated upstream
-  const resp = await fetch(
-    `https://api.quickbase.com/v1/solutions/${solutionId}`,
-    {
-      method: 'PUT',
-      headers,
-      body: solutionYaml
-    }
-  )
-
-  return resp.status
-=======
   return await fetch(`https://api.quickbase.com/v1/solutions/${solutionId}`, {
     method: 'PUT',
     headers,
     body: solutionYaml
   })
->>>>>>> Stashed changes
+
+  return await fetch(
+      `https://api.quickbase.com/v1/solutions/${solutionId}`,
+      {
+        method: 'PUT',
+        headers,
+        body: solutionYaml
+      }
+  )
 }
 
 module.exports = { run, updateSolution, GetSolutionYaml: getSolutionYaml }
