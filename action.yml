@@ -1,13 +1,6 @@
 name: 'Updates a Quickbase solution'
 description: 'Updates a Quickbase solution when PR is merged'
-author: 'ekaradzha@1uicbase.com'
-
-on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+author: 'ekaradzha@quickbase.com'
 
 # Define your inputs here.
 inputs:
@@ -40,8 +33,8 @@ inputs:
 
 # Define your outputs here.
 outputs:
-  head_branch:
-    description: 'Name of the branch'
+  solution_api_message:
+    description: 'Messages returned from Solution API'
 
 runs:
   using: node20
