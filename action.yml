@@ -1,6 +1,13 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Updates a Quickbase solution'
+description: 'Updates a Quickbase solution when PR is merged'
+author: 'ekaradzha@1uicbase.com'
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
 
 # Define your inputs here.
 inputs:
