@@ -42080,6 +42080,7 @@ async function run() {
       core.setFailed(
         `Failed to update solution. Status code: ${updateResponse.status}, ${updateResponse.statusText}`
       )
+
       return
     }
 

@@ -26,7 +26,7 @@ async function run() {
       QB_USR_TOKEN
     )
 
-      if (updateResponse.status !== 200) {
+    if (updateResponse.status !== 200) {
       console.error(updateResponse.statusText)
       console.error(updateResponse.text())
       console.error(updateResponse.body)
@@ -83,15 +83,6 @@ async function updateSolution(
     headers,
     body: solutionYaml
   })
-
-  return await fetch(
-      `https://api.quickbase.com/v1/solutions/${solutionId}`,
-      {
-        method: 'PUT',
-        headers,
-        body: solutionYaml
-      }
-  )
 }
 
 module.exports = { run, updateSolution, GetSolutionYaml: getSolutionYaml }
