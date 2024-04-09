@@ -7,12 +7,6 @@ inputs:
   gh_token:
     description: 'GitHub token'
     required: true
-  owner_name:
-    description: 'Owner name of the repository'
-    required: true
-  owner_email:
-    description: 'Owner email of the repository'
-    required: true
   # QBL settings
   qb_user_token:
     description: 'Quickbase user token'
