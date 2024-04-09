@@ -3,21 +3,6 @@ const { context } = require('@actions/github')
 const { Octokit } = require('octokit')
 const { rest } = new Octokit({ auth: core.getInput('gh_token') })
 
-// const {rest} = new Octokit({
-//     auth: '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'
-// })
-// //Action variables
-// //const repo = context.repo.repo
-// //const owner = context.repo.owner
-// const repo = 'solution-update-action'
-// const owner = 'ekaradzha-qb'
-// const QB_SOLUTION_ID = core.getInput('qb_solution_id')
-// const QB_USR_TOKEN = core.getInput('qb_user_token')
-// const QB_REALM = core.getInput('qb_realm')
-// const QBL_VERSION = core.getInput('qbl_version')
-// // const QBL_FILENAME = core.getInput('qbl_filename')
-// const QBL_FILENAME = 'solution_qbl.yaml'
-
 //Action variables
 const repo = context.repo.repo
 const owner = context.repo.owner
@@ -41,8 +26,18 @@ async function run() {
       QB_USR_TOKEN
     )
 
+<<<<<<< Updated upstream
     if (status !== 200) {
       core.setFailed(`Failed to update solution. Status code: ${status}`)
+=======
+    if (updateResponse.status !== 200) {
+      console.error(updateResponse.statusText)
+      console.error(updateResponse.text())
+      console.error(updateResponse.body)
+      core.setFailed(
+        `Failed to update solution. Status code: ${updateResponse.status}, ${updateResponse.statusText}`
+      )
+>>>>>>> Stashed changes
       return
     }
 
@@ -87,6 +82,7 @@ async function updateSolution(
     return false
   }
 
+<<<<<<< Updated upstream
   const resp = await fetch(
     `https://api.quickbase.com/v1/solutions/${solutionId}`,
     {
@@ -97,6 +93,13 @@ async function updateSolution(
   )
 
   return resp.status
+=======
+  return await fetch(`https://api.quickbase.com/v1/solutions/${solutionId}`, {
+    method: 'PUT',
+    headers,
+    body: solutionYaml
+  })
+>>>>>>> Stashed changes
 }
 
 module.exports = { run, updateSolution, GetSolutionYaml: getSolutionYaml }

@@ -42050,21 +42050,6 @@ const { context } = __nccwpck_require__(5438)
 const { Octokit } = __nccwpck_require__(7467)
 const { rest } = new Octokit({ auth: core.getInput('gh_token') })
 
-// const {rest} = new Octokit({
-//     auth: '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'
-// })
-// //Action variables
-// //const repo = context.repo.repo
-// //const owner = context.repo.owner
-// const repo = 'solution-update-action'
-// const owner = 'ekaradzha-qb'
-// const QB_SOLUTION_ID = core.getInput('qb_solution_id')
-// const QB_USR_TOKEN = core.getInput('qb_user_token')
-// const QB_REALM = core.getInput('qb_realm')
-// const QBL_VERSION = core.getInput('qbl_version')
-// // const QBL_FILENAME = core.getInput('qbl_filename')
-// const QBL_FILENAME = 'solution_qbl.yaml'
-
 //Action variables
 const repo = context.repo.repo
 const owner = context.repo.owner
@@ -42080,7 +42065,7 @@ const QBL_FILENAME = core.getInput('qbl_filename')
  */
 async function run() {
   try {
-    const status = await updateSolution(
+    const updateResponse = await updateSolution(
       QB_SOLUTION_ID,
       getSolutionYaml(),
       QBL_VERSION,
@@ -42088,8 +42073,13 @@ async function run() {
       QB_USR_TOKEN
     )
 
-    if (status !== 200) {
-      core.setFailed(`Failed to update solution. Status code: ${status}`)
+    if (updateResponse.status !== 200) {
+      console.error(updateResponse.statusText)
+      console.error(updateResponse.text())
+      console.error(updateResponse.body)
+      core.setFailed(
+        `Failed to update solution. Status code: ${updateResponse.status}, ${updateResponse.statusText}`
+      )
       return
     }
 
@@ -42106,7 +42096,7 @@ async function getSolutionYaml() {
     repo,
     path: QBL_FILENAME
   })
-
+  console.info(yaml)
   if (yaml.data.content != null) {
     return atob(yaml.data.content)
   }
@@ -42134,16 +42124,11 @@ async function updateSolution(
     return false
   }
 
-  const resp = await fetch(
-    `https://api.quickbase.com/v1/solutions/${solutionId}`,
-    {
-      method: 'PUT',
-      headers,
-      body: solutionYaml
-    }
-  )
-
-  return resp.status
+  return await fetch(`https://api.quickbase.com/v1/solutions/${solutionId}`, {
+    method: 'PUT',
+    headers,
+    body: solutionYaml
+  })
 }
 
 module.exports = { run, updateSolution, GetSolutionYaml: getSolutionYaml }
