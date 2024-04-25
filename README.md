@@ -14,20 +14,35 @@ You can set your own steps in the workflow file to run the action.
 
 ## Inputs
 
-The action requires the following inputs:
 
-- `gh_token`: The GitHub token. This is required.
-- `owner_name`: The owner name of the repository. This is required.
-- `owner_email`: The owner email of the repository. This is required.
-- `pr_title`: The title of the PR. The default is 'Export solution version'.
-- `pr_description`: The description for the auto-created PR. The default is 'See the difference between the old and new solution QBL'.
-- `branch_name`: The branch name to create PR in. The default is 'new-solution-version'.
-- `qb_user_token`: The Quickbase user token. This is required.
-- `qb_realm`: The Quickbase realm name. This is required.
-- `qbl_version`: The Quickbase QBL version. The default is '0.2'.
-- `qbl_filename`: The filename for the QBL file that will be checked in the repository. The default is 'solution.yaml'.
-- `qb_solution_id`: The ID of the solution that will be exported. This is required.
+- **gh_token**
+    - Description: The personal access token for authenticating with GitHub.
+    - Required: true
+
+- **qb_user_token**
+    - Description: The user token generated from Quickbase for authentication.
+    - Required: true
+
+- **qb_realm**
+    - Description: The name of the Quickbase realm where the solution is located.
+    - Required: true
+
+- **qbl_version**
+    - Description: The version of the Quickbase Language (QBL) to be used.
+    - Default: '0.2'
+
+- **qbl_filename**
+    - Description: The name of the QBL file that contains the solution definition.
+    - Default: 'solution.yaml'
+
+- **qb_solution_id**
+    - Description: The ID of the solution in Quickbase that will be updated.
+    - Required: true
 
 ## Outputs
 
+- **solution_api_message**
+    - Description: The messages returned from the Solution API
+
+    
 You can see the action result in the Actions tab in your repository. In case of an error, the action will fail and you can see the error message in the logs.
