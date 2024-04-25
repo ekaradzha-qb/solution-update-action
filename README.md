@@ -15,28 +15,28 @@ You can set your own steps in the workflow file to run the action.
 ## Inputs
 This action requires the following inputs:
 
-- **gh_token**
+- **`gh_token`**
     - Description: The personal access token for authenticating with GitHub.
     - Required: true
 
 ### Quickbase Solution (QBL) Settings
-- **qb_user_token**
+- **`qb_user_token`**
     - Description: The user token generated from Quickbase for authentication.
     - Required: true
 
-- **qb_realm**
+- **`qb_realm`**
     - Description: The name of the Quickbase realm where the solution is located.
     - Required: true
 
-- **qbl_version**
+- **`qbl_version`**
     - Description: The version of the Quickbase Language (QBL) to be used.
     - Default: '0.2'
 
-- **qbl_filename**
+- **`qbl_filename`**
     - Description: The name of the QBL file that contains the solution definition.
     - Default: 'solution.yaml'
 
-- **qb_solution_id**
+- **`qb_solution_id`**
     - Description: The ID of the solution in Quickbase that will be updated.
     - Required: true
 
